@@ -1,0 +1,27 @@
+
+<template>
+  <div class="registration">
+    <div class="registration-card">
+      <auth-tabs active="registration" />
+      <form class="registration-card_form" v-on:submit.prevent="registerUser">
+        <label class="registration-card_form_label">Username</label>
+        <input v-model="username"
+          type="text"
+          placeholder="Enter username"
+          class="registration-card_form_input" />
+
+        <label class="registration-card_form_label">Password</label>
+        <input v-model="password" 
+        type="password" 
+        placeholder="Enter password" 
+        class="registration-card_form_input" />
+
+        <button type="submit" 
+        class="registration-card_form_button">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script src="./registration.js"></script>
+<style src="./registration.css"></style>

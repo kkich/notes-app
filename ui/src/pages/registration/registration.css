@@ -1,0 +1,49 @@
+/* Блок */
+.registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f3f4f6;
+}
+
+.registration-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 350px;
+}
+
+/* форма */
+.registration-card_form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.registration-card_form_label {
+  font-size: 0.9rem;
+  color: #3c605d;
+}
+
+.registration-card_form_input {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.registration-card_form_button {
+  background: #199c7e;
+  color: #fff;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.registration-card_form_button:hover {
+  background: #167861;
+}

@@ -1,0 +1,8 @@
+<template>
+    <button class="btn"
+        v-on:click="$emit('click')">
+        <slot></slot>
+    </button>
+</template>
+
+<style src="./btn.css"></style>
