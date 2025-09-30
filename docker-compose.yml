@@ -17,6 +17,7 @@ services:
     depends_on:
       - db
     environment:
+      JWT_SECRET: supersecret
       DB_USER: postgres
       DB_PASSWORD: mkkilkgmom
       DB_HOST: db

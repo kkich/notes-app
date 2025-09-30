@@ -15,11 +15,6 @@ export default {
   },
   methods: {
     async registerUser() {
-      if (this.password !== this.confirmPassword) {
-        alert("Пароли не совпадают!");
-        return;
-      }
-
       try {
         const res = await fetch("http://localhost:3000/api/register", {
           method: "POST",

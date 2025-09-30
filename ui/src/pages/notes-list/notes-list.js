@@ -15,7 +15,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['notes_list']),
+    ...mapGetters([
+        'notes_list',
+        'isAuth',
+    ]),
   },
   methods: {
     ...mapActions([
@@ -28,5 +31,10 @@ export default {
     openNote(id) {
       this.$router.push(`/notes/${id}`);
     },
+  },
+  created() {
+    if (this.isAuth) {
+        this.init();
+    }
   },
 };

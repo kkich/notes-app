@@ -29,7 +29,7 @@ export default {
 
         const data = await res.json();
         localStorage.setItem("token", data.token); 
-        this.$router.push("/notes");
+        this.$router.push("/notes-list");
       } catch (err) {
         alert(err.message);
       }

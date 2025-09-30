@@ -2,10 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const { Pool } = require("pg");
 const routes = require('./routes');
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-app.use('/api', routes);
 
 const {
     DB_HOST = 'db',
@@ -13,7 +13,6 @@ const {
     DB_PASSWORD = 'notes_pass',
     DB_NAME = 'notes_db',
     DB_PORT = 5432,
-    PORT = 3000
 } = process.env;
 
 const pool = new Pool({
@@ -25,7 +24,17 @@ const pool = new Pool({
     max: 5
 });
 
-//ожидание старта базы
+
+app.use(cors({
+  origin: ["http://localhost:5173","http://localhost:5174"], 
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));
+app.use("/api", routes);
+
+const PORT = process.env.PORT || 3000;
+
+// ожидание старта базы
 async function waitForDb(retries = 10, delayMs = 1000) {
   for (let i = 0; i < retries; i++) {
     try {
@@ -40,7 +49,7 @@ async function waitForDb(retries = 10, delayMs = 1000) {
   throw new Error('Could not connect to Postgres');
 }
 
-//автоматическое создание таблиц
+// автоматическое создание таблиц
 async function initTables() {
   try {
     await pool.query(`
@@ -65,7 +74,7 @@ async function initTables() {
     console.log("Tables checked/created");
   } catch (err) {
     console.error("Error creating tables:", err.message);
-        throw err;
+    throw err;
   }
 }
 
@@ -82,12 +91,12 @@ app.get('/', (req, res) => {
   res.send('Notes backend running');
 });
 
-//Запуск
+// Запуск
 (async () => {
   try {
     await waitForDb(15, 1000);
     await initTables();  
-      app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
   } catch (err) {
     console.error('Failed to start server:', err.message);
     process.exit(1);
