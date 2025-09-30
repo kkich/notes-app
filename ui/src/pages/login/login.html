@@ -5,16 +5,18 @@
 
       <form class="login-card_form" v-on:submit.prevent="loginUser">
         <label class="login-card_form_label">Username</label>
-        <input v-model="username" 
-        type="text" 
-        placeholder="Enter username" class="login-card_form_input" />
+        <input class="login-card_form_input"
+          type="text"
+          v-model="username"
+          placeholder="Enter username" />
 
         <label class="login-card_form_label">Password</label>
-        <input v-model="password"
-        type="password" 
-        placeholder="Enter password" class="login-card_form_input" />
+        <input class="login-card_form_input"
+          type="password"
+          v-model="password
+          placeholder="Enter password" />
 
-        <button type="submit" class="login-card_form_button">Login</button>
+        <button class="login-card_form_button" type="submit">Login</button>
       </form>
     </div>
   </div>

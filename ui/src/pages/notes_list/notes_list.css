@@ -31,7 +31,7 @@
 .notes-content_header_add {
   background: #6d28d9;
   color: #fff;
-  padding: 0.5rem 1rem;
+  padding: .5rem 1rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -60,7 +60,7 @@
   background: #fff;
   margin-bottom: 1rem;
   border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .05);
   cursor: pointer;
 }
 .notes-content_list_item:hover {
@@ -70,10 +70,10 @@
   font-size: 1rem;
 }
 .notes-content_list_item p {
-  font-size: 0.85rem;
+  font-size: .85rem;
   color: #6b7280;
 }
 .notes-content_list_item_date {
-  font-size: 0.8rem;
+  font-size: .8rem;
   color: #9ca3af;
 }

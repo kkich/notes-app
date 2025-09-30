@@ -10,15 +10,15 @@
 
   --vt-c-indigo: #2c3e50;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  --vt-c-divider-light-1: rgba(60, 60, 60, .29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, .12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, .65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, .48);
 
   --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+  --vt-c-text-light-2: rgba(60, 60, 60, .66);
   --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --vt-c-text-dark-2: rgba(235, 235, 235, .64);
 }
 
 /* semantic color variables for this project */
@@ -63,8 +63,8 @@ body {
   color: var(--color-text);
   background: var(--color-background);
   transition:
-    color 0.5s,
-    background-color 0.5s;
+    color .5s,
+    background-color .5s;
   line-height: 1.6;
   font-family:
     Inter,

@@ -21,7 +21,7 @@
   margin-bottom: 1.5rem;
 }
 .login__tab {
-  padding: 0.5rem 1rem;
+  padding: .5rem 1rem;
   border: none;
   background: none;
   font-weight: bold;
@@ -40,18 +40,18 @@
   gap: 1rem;
 }
 .login-card_form_label {
-  font-size: 0.9rem;
+  font-size: .9rem;
   color: #3c605d;
 }
 .login-card_form_input {
-  padding: 0.5rem;
+  padding: .5rem;
   border: 1px solid #d1d5db;
   border-radius: 8px;
 }
 .login-card_form_button {
   background: #199c7e;
   color: #fff;
-  padding: 0.75rem;
+  padding: .75rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;

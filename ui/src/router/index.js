@@ -7,18 +7,15 @@ const routes = [
     {
         path: '/',
         redirect: '/login',
-    },
-    {
+    }, {
         path: '/login',
         name: 'Login',
         component: Login,
-    },
-    {
+    }, {
         path: '/registration',
         name: 'Registration',
         component: Registration,
-    },
-    {
+    }, {
         path: '/notes-list',
         name: 'Notes List',
         component: NotesList,
@@ -27,6 +24,7 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 });
+
 export default router;
