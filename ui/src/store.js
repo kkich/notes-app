@@ -4,16 +4,16 @@ import axios from 'axios';
 const API = 'http://localhost:3000/api';
 
 const store = {
-    state: _ => ({
-        notes: [],
-        user: null,
-    }),
+  state: _ => ({
+    notes: [],
+    user: null,
+  }),
 
-    getters:  {
-        notes_list: state => state.notes,
-        isAuth: (state) => !!state.token,
-        current_user: (state) => state.user,
-    },
+  getters:  {
+    notes_list: state => state.notes,
+    is_auth: (state) => !!state.token,
+    current_user: (state) => state.user,
+  },
 
   mutations: {
     set_notes(state, notes) {
@@ -77,7 +77,5 @@ const store = {
 }
 
 export default createStore({
-    modules: {
-        store,
-    },
+  modules: { store },
 });
