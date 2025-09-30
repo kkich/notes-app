@@ -1,8 +1,10 @@
-import btn from "@/components/btn/Btn.vue";
 import { mapGetters, mapActions } from 'vuex';
+import template from './notes_list.html?vue';
+import btn from "@/components/btn/btn.js";
+import './notes_list.css';
 
 export default {
-  name: "NotesList",
+  template,
   components: {
     btn,
   },

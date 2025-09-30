@@ -1,7 +1,9 @@
+import template from './registration.html?vue';
 import AuthTabs from "@/components/AuthTabs.vue";
+import './registration.css';
 
 export default {
-  name: "RegistrationPage",
+  template,
   components: {
     AuthTabs,
   },

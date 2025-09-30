@@ -1,8 +1,7 @@
-import btn from "./Btn.vue";
+import template from "./btn.html?vue";
+import './btn.css';
 
 export default {
-  components: {
-    btn,
-  },
+  template,
   props: ['text'],
 };

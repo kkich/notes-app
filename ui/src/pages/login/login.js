@@ -1,7 +1,9 @@
+import template from './login.html?vue';
 import AuthTabs from "@/components/AuthTabs.vue";
+import './login.css';
 
 export default {
-  name: "LoginPage",
+  template,
   components: {
     AuthTabs,
   },
