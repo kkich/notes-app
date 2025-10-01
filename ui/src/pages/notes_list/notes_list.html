@@ -8,9 +8,9 @@
     <main class="notes-content">
       <div class="notes-content_header">
         <h2>Notes</h2>
-        <btn v-on:click="addNote">
+        <component is="btn" v-on:click="addNote">
           <span>+ Add Note</span>
-        </btn>
+        </component>
       </div>
       <!--если нет заметок-->
       <div v-if="notes_list == 0" class="notes-content_empty">
@@ -23,13 +23,13 @@
           v-for="note in notes_list"
           :key="note.id"
           class="notes-content_list_item"
-          @click="openNote(note.id)"
+          v-on:click="openNote(note.id)"
         >
           <div>
             <strong v-text="note.title"></strong>
             <p v-text="note.title"></p>
           </div>
-          <span class="notes-content_list_item_date">{{ note.date }}</span>
+          <span class="notes-content_list_item_date" v-text="note.date"></span>
         </li>
       </ul>
     </main>

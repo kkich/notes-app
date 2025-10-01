@@ -1,0 +1,15 @@
+<template>
+  <div class="auth-tab">
+    <button
+      class="auth-tab_btn"
+      :class="{ 'auth-tab_btn--active': active_tab === tab.name }"
+      :key="tab.name"
+      v-for="tab in tabs"
+      v-on:click="$router.push(tab.route)"
+      v-text="tab.label"
+    >
+    </button>
+  </div>
+</template>
+
+

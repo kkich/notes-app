@@ -1,0 +1,19 @@
+.auth-tab {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-tab_btn {
+  padding: .5rem 1rem;
+  border: none;
+  background: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.auth-tab_btn--active {
+  color: #199c7e;
+  border-bottom: 2px solid #199c7e;
+}

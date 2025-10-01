@@ -1,6 +1,6 @@
 import { mapGetters, mapActions } from 'vuex';
 import template from './notes_list.html?vue';
-import btn from "@/components/auth_card/auth_card.js";
+import btn from "@/components/btn/btn.js";
 import './notes_list.css';
 
 export default {
@@ -32,7 +32,12 @@ export default {
       'init',
     ]),
     addNote() {
-      this.add_note(note);
+      const newNote = {
+        title: "New Note",
+        content: "Empty...",
+        date: new Date().toLocaleDateString()
+      };
+      this.add_note(newNote);
     },
     openNote(id) {
       this.$router.push(`/notes/${id}`);

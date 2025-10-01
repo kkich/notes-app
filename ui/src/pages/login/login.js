@@ -1,43 +1,54 @@
+import { mapGetters, mapActions } from "vuex";
 import template from './login.html?vue';
-import AuthTabs from "@/components/AuthTabs.vue";
+import auth_tab from "@/components/auth_tab/auth_tab.js";
+import auth_card from '@/components/auth_card/auth_card.js';
 import './login.css';
 
 export default {
+  name: 'Login',
   template,
 
   components: {
-    AuthTabs,
+    auth_tab,
+    auth_card,
   },
 
   data() {
     return {
-      username: '',
-      password: '',
+      inputs: [
+        {
+          id: 'username',
+          type: "text",
+          placeholder: "Enter username",
+          value: "",
+          label: "Username"
+        },{
+          id: 'password',
+          type: "password",
+          placeholder: "Enter password",
+          value: "",
+          label: "Password"
+        },
+      ],
     };
   },
 
   methods: {
-    // rename function name
-    async loginUser() {
+    ...mapActions(["login"]),
+    updateInput({ id, value }) {
+      this.inputs.find(item => item.id == id).value = value;
+    },
+    async login_user(){
+      const [username, password] = this.inputs.map(i => i.value);
+
       try {
-        const res = await fetch('http://localhost:3000/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            username: this.username,
-            password: this.password,
-          }),
+        await this.login({
+          username,
+          password,
         });
-
-        if (!res.ok) {
-          throw new Error('Login failed');
-        }
-
-        const data = await res.json();
-        localStorage.setItem('token', data.token); 
-        this.$router.push('/notes-list');
-      } catch (err) {
-        alert(err.message);
+        this.$router.push("/notes_list");
+      }catch(err){
+        alert("Login failed: " + (err.response?.data?.error || err.message));
       }
     },
   },

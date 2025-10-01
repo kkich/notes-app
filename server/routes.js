@@ -27,7 +27,7 @@ function authMiddleware(req, res, next) {
 // ===== USERS =====
 
 // Регистрация (создание пользователя + токен)
-router.post("/register", async (req, res) => {
+router.post("/registration", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {

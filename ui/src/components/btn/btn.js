@@ -1,7 +1,13 @@
 import template from "./btn.html?vue";
-import './btn.css';
+import "./btn.css";
 
 export default {
+  name: "btn",
   template,
-  props: ['text'],
+  props: {
+    type: {
+      type: String,
+      default: "button",
+    },
+  },
 };

@@ -1,5 +1,6 @@
 <template>
     <button class="btn"
+        :type="type"
         v-on:click="$emit('click')">
         <slot></slot>
     </button>

@@ -1,26 +1,13 @@
-
 <template>
   <div class="registration">
     <div class="registration-card">
-      <auth-tabs active="registration" />
-      <form class="registration-card_form" v-on:submit.prevent="registerUser">
-        <label class="registration-card_form_label">Username</label>
-        <input class="registration-card_form_input"
-          type="text"
-          v-model="username"
-          placeholder="Enter username" />
+      <auth_tab active_tab="registration" />
 
-        <label class="registration-card_form_label">Password</label>
-        <input class="registration-card_form_input"
-          type="password"
-          v-model="password"
-          placeholder="Enter password" />
-
-        <button class="registration-card_form_button"
-          type="submit">
-          Sign Up
-        </button>
-      </form>
+      <auth_card
+        :input="inputs"
+        :btn="{ title: 'Sign Up', action: register_user }"
+        v-on:update_input="updateInput"
+      />
     </div>
   </div>
 </template>

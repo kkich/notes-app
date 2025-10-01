@@ -1,0 +1,37 @@
+.note-detail {
+  display: flex;
+  gap: 20px;
+}
+
+.note-detail_sidebar {
+  width: 200px;
+  border-right: 1px solid #ddd;
+}
+
+.note-detail_sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.note-detail_sidebar li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.note-detail_sidebar li.active {
+  font-weight: bold;
+  background: #f0f0f0;
+}
+
+.note-detail_content {
+  flex: 1;
+  padding: 10px;
+}
+
+.note-detail_content_actions {
+  margin-top: 20px;
+}
+
+.note-detail_content_actions button {
+  margin-right: 10px;
+}
