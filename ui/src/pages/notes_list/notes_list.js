@@ -6,7 +6,6 @@ import './notes_list.css';
 
 export default {
   template,
-
   components: {
     btn,
     modal,
@@ -32,7 +31,6 @@ export default {
   methods: {
     ...mapActions([
       'add_note',
-      'init',
       'logout',
     ]),
     open_modal() {
@@ -68,11 +66,5 @@ export default {
       this.logout();
       this.$router.push('/login');
     },
-  },
-
-  created() {
-    if (this.is_auth) {
-      this.init();
-    }
   },
 };

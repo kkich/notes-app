@@ -1,11 +1,26 @@
- <div class="modal-overlay">
-    <div class="modal">
-    <h3>Новая заметка</h3>
-    <!-- <input v-model="newNote.title" placeholder="Название заметки" />
-    <textarea v-model="newNote.text" placeholder="Текст заметки"></textarea> -->
+<div class="modal_container">
+  <div class="modal">
+    <h3 class="modal-header"
+      v-text="header">
+    </h3>
+
+    <input class="modal-title"
+      v-model="title"
+      placeholder="Название заметки" />
+    <textarea class="modal-text"
+      v-model="text"
+      placeholder="Текст заметки">
+    </textarea>
+
     <div class="modal-actions">
-        <btn @click="">Сохранить</btn>
-        <btn @click="">Отмена</btn>
+      <component is="btn"
+        v-on:click="$emit('save')">
+        <span v-text="'Сохранить'"></span>
+      </component>
+      <component is="btn"
+        v-on:click="$emit('cancel')">
+        <span v-text="'Отмена'"></span>
+      </component>
     </div>
-    </div>
+  </div>
 </div>

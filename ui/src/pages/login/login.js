@@ -1,15 +1,12 @@
 import template from './login.html?vue';
 import { mapActions } from 'vuex';
-import auth_tab from '@/components/auth/auth_tab.js';
-import auth_form from '@/components/auth/auth_form.js';
+import auth from '@/components/auth/auth.js';
 import './login.css';
 
 export default {
   template,
-
   components: {
-    auth_tab,
-    auth_form,
+    auth,
   },
 
   data() {
@@ -36,15 +33,12 @@ export default {
       this.input.find(item => item.id == id).value = value;
     },
     async login_user(){
+      // make the same logic as registration
       const [username, password] = this.input.map(i => i.value);
-
       try {
-        await this.login({
-          username,
-          password,
-        });
+        await this.login({ username, password });
         this.$router.push('/notes_list');
-      }catch(err){
+      } catch(err) {
         alert('Login failed: ' + (err.response?.data?.error || err.message));
       }
     },

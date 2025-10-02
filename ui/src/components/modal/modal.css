@@ -9,6 +9,7 @@
   gap: 1rem;
 }
 
+/* пиши стили классами например .modal-input */
 .modal input,
 .modal textarea {
   padding: .5rem;

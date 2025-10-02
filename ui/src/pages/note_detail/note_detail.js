@@ -1,7 +1,7 @@
-import { mapGetters, mapActions } from 'vuex';
 import template from './note_detail.html?vue';
-import './note_detail.css';
+import { mapGetters, mapActions } from 'vuex';
 import btn from '@/components/btn/btn.js';
+import './note_detail.css';
 
 export default {
   template,
@@ -9,6 +9,7 @@ export default {
   components: {
     btn
   },
+
   computed: {
     ...mapGetters(['notes_list']),
     note() {
@@ -18,9 +19,9 @@ export default {
       return this.notes_list;
     },
   },
+
   methods: {
     ...mapActions([
-      'fetch_notes',
       'edit_note',
       'delete_note',
     ]),
@@ -34,16 +35,11 @@ export default {
     //     content: 'new text',
     //   });
     // },
-    // async deleteNote() {
+    // deleteNote() {
     //   if (confirm('Delete this note?')) {
     //     // позже к API
     //     this.delete_note(this.note.id);
     //   }
     // },
-  },
-  created() {
-    if (!this.notes_list.length) {
-      this.fetch_notes();
-    }
   },
 };

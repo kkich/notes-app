@@ -1,37 +1,32 @@
-<template>
-  <div class="note-detail">
-    <aside class="note-detail_sidebar">
-      <h3>All Notes</h3>
-      <ul>
-        <li 
-          v-for="n in notes" 
-          :key="n.id" 
-          v-on:click="openNote(n.id)"
-          :class="{ active: n.id == note?.id }"
-          v-text="n.title"
-        >
-        </li>
-      </ul>
-    </aside>
+<div class="note-detail">
+  <aside class="note-detail_sidebar">
+    <h3>All Notes</h3>
+    <ul>
+      <li :class="{ active: n.id == note?.id }"
+        v-for="n in notes" 
+        :key="n.id" 
+        v-text="n.title"
+        v-on:click="openNote(n.id)">
+      </li>
+    </ul>
+  </aside>
 
-    <main class="note-detail_content" v-if="note">
-      <h2 v-text="note.title"></h2>
-      <p v-text="note.text"></p>
-      <p class="note-detail_content_date">Дата: {{ note.date }}</p>
+  <main class="note-detail_content" v-if="note">
+    <h2 v-text="note.title"></h2>
+    <p v-text="note.text"></p>
+    <p class="note-detail_content_date">Дата: {{ note.date }}</p>
 
-      <div class="note-detail_content_actions">
-        <component is="btn" v-on:click="editNote">
-          <span>Редактировать</span>
-        </component>
-        <component is="btn" v-on:click="deleteNote">
-          <span>Удалить</span>
-        </component>
-      </div>
-    </main>
+    <div class="note-detail_content_actions">
+      <component is="btn" v-on:click="editNote">
+        <span>Редактировать</span>
+      </component>
+      <component is="btn" v-on:click="deleteNote">
+        <span>Удалить</span>
+      </component>
+    </div>
+  </main>
 
-    <main v-else>
-      <p>Заметка не найдена</p>
-    </main>
-  </div>
-</template>
-
+  <main v-else>
+    <p>Заметка не найдена</p>
+  </main>
+</div>

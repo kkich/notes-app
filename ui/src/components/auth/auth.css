@@ -1,3 +1,11 @@
+.auth {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  width: 350px;
+}
+
 .auth_form {
   display: flex;
   flex-direction: column;

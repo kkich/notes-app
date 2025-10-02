@@ -3,4 +3,5 @@ import './modal.css';
 
 export default {
   template,
+  props: ['header', 'title', 'text'],
 };

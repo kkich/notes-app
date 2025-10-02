@@ -1,15 +1,12 @@
 import template from './registration.html?vue';
 import { mapGetters, mapActions } from 'vuex';
-import auth_tab from '@/components/auth/auth_tab.js';
-import auth_form from '@/components/auth/auth_form.js';
+import auth from '@/components/auth/auth.js';
 import './registration.css';
 
 export default {
   template,
-
   components: {
-    auth_tab,
-    auth_form,
+    auth,
   },
 
   data() {
@@ -31,10 +28,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters([
-      'is_auth',
-      'error',
-    ]),
+    ...mapGetters(['error']),
   },
 
   methods: {
