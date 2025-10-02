@@ -1,0 +1,11 @@
+<div class="auth_tab">
+  <button class="auth_tab-btn"
+    :class="{ 'auth_tab-btn--active': active_tab == tab.name.toLowerCase() }"
+    v-for="tab in tabs"
+    :key="tab.name"
+    v-text="tab.name"
+    v-on:click="$router.push(tab.route)">
+  </button>
+</div>
+
+

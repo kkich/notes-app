@@ -1,0 +1,15 @@
+<div class="auth_form">
+  <template v-for="item in input" :key="item.id">
+    <label class="auth_form-label" v-text="item.label"></label>
+    <input class="auth_form-input"
+      :type="item.type"
+      :value="item.value"
+      :placeholder="item.placeholder"
+      v-on:input="$emit('update_input', { id: item.id, value: $event.target.value })"
+    />
+  </template>
+
+  <component is="btn" v-on:click="btn.action">
+    <span v-text="btn.title"></span>
+  </component>
+</div>

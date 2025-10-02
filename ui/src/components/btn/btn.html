@@ -1,7 +1,1 @@
-<template>
-    <button class="btn"
-        :type="type"
-        v-on:click="$emit('click')">
-        <slot></slot>
-    </button>
-</template>
+<button class="btn" v-on:click="$emit('click')"><slot></slot></button>

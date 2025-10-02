@@ -1,10 +1,10 @@
-.auth-tab {
+.auth_tab {
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
 }
 
-.auth-tab_btn {
+.auth_tab-btn {
   padding: .5rem 1rem;
   border: none;
   background: none;
@@ -13,7 +13,7 @@
   color: #6b7280;
 }
 
-.auth-tab_btn--active {
+.auth_tab-btn--active {
   color: #199c7e;
   border-bottom: 2px solid #199c7e;
 }

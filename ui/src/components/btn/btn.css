@@ -8,6 +8,7 @@
   font-weight: bold;
   transition: background-color 250ms ease;
 }
+
 .btn:hover {
   background-color: #167861;
 }
