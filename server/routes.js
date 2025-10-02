@@ -30,31 +30,38 @@ function authMiddleware(req, res, next) {
 router.post("/registration", async (req, res) => {
   const { username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ error: "Username and password required" });
-  }
-
   try {
+    if (!username || !password) {
+      return res.status(400).json({ error: "Username and password required" });
+    }
+
+    // Проверяем, есть ли такой username
+    const { rows: existing } = await pool.query(
+      "SELECT * FROM users WHERE username = $1",
+      [username]
+    );
+    if (existing.length > 0) {
+      return res.status(400).json({ error: "Username already taken" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const { rows } = await pool.query(
       "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id, username",
       [username, hashedPassword]
     );
 
     const user = rows[0];
-    const token = jwt.sign(
-      { id: user.id, username: user.username },
-      JWT_SECRET,
-      { expiresIn: "1h" }
-    );
 
-    res.status(201).json({ token, user });
+    // Возвращаем user, но токен пока не нужен
+    res.status(201).json({ message: "Registration successful", user });
+
   } catch (err) {
     if (err.code === "23505") {
-      res.status(400).json({ error: "Username already taken" });
-    } else {
-      res.status(500).json({ error: err.message });
+      return res.status(400).json({ error: "Username already taken" });
     }
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

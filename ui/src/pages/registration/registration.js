@@ -1,5 +1,5 @@
 import template from './registration.html?vue';
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import auth_tab from '@/components/auth/auth_tab.js';
 import auth_form from '@/components/auth/auth_form.js';
 import './registration.css';
@@ -28,6 +28,13 @@ export default {
         label: 'Password'
       }],
     };
+  },
+
+  computed: {
+    ...mapGetters([
+      'is_auth',
+      'error',
+    ]),
   },
 
   methods: {

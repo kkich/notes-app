@@ -1,6 +1,7 @@
-import { mapGetters, mapActions } from 'vuex';
 import template from './notes_list.html?vue';
-import btn from "@/components/btn/btn.js";
+import { mapGetters, mapActions } from 'vuex';
+import btn from '@/components/btn/btn.js';
+import modal from '@/components/modal/modal.js';
 import './notes_list.css';
 
 export default {
@@ -8,14 +9,16 @@ export default {
 
   components: {
     btn,
+    modal,
   },
 
   data() {
     return {
-      notes: [
-        { id: 1, title: 'Note 1', preview: 'Short text of the note...', date: 'Apr 10, 2024' },
-        { id: 2, title: 'Note 2', preview: 'Short text of the note...', date: 'Apr 2, 2024' },
-      ],
+      showModal: false,
+      newNote: {
+        title: '',
+        text: '',
+      }
     };
   },
 
@@ -30,17 +33,40 @@ export default {
     ...mapActions([
       'add_note',
       'init',
+      'logout',
     ]),
-    addNote() {
-      const newNote = {
-        title: "New Note",
-        content: "Empty...",
-        date: new Date().toLocaleDateString()
-      };
-      this.add_note(newNote);
+    open_modal() {
+      this.showModal = true;
     },
+    close_modal() {
+      this.showModal = false;
+    },
+    async saveNote() {
+      if (!this.newNote.title || !this.newNote.text) {
+        alert('Введите название и текст заметки');
+        return;
+      }
+
+      const note = {
+        title: this.newNote.title,
+        content: this.newNote.text,
+        date: new Date().toLocaleDateString(),
+      };
+
+      this.add_note(note);
+
+      this.newNote.title = '';
+      this.newNote.text = '';
+      this.showModal = false;
+    },
+
     openNote(id) {
       this.$router.push(`/notes/${id}`);
+    },
+
+    log_out() {
+      this.logout();
+      this.$router.push('/login');
     },
   },
 

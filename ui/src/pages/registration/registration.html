@@ -1,14 +1,14 @@
-<template>
-  <div class="registration">
-    <div class="registration-card">
-      <component is="auth_tab"
-        active_tab="registration">
-      </component>
-      <component is="auth_form"
-        :input="input"
-        :btn="{ title: 'Sign Up', action: register_user }"
-        v-on:update_input="update_input">
-      </component>
-    </div>
+<div class="registration">
+  <div class="registration-card">
+    <component is="auth_tab"
+      active_tab="registration">
+    </component>
+    <span v-text="error"></span>
+
+    <component is="auth_form"
+      :input="input"
+      :btn="{ title: 'Sign Up', action: register_user }"
+      v-on:update_input="update_input">
+    </component>
   </div>
-</template>
+</div>

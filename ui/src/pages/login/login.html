@@ -1,14 +1,13 @@
-<template>
-  <div class="login">
-    <div class="login-card">
-      <component is="auth_tab"
-        active_tab="login">
-      </component>
-      <component is="auth_form"
-        :input="input"
-        :btn="{ title: 'Login', action: login_user, }"
-        v-on:update_input="update_input">
-      </component>
-    </div>
+<div class="login">
+  <div class="login-card">
+    <component is="auth_tab"
+      active_tab="login">
+    </component>
+
+    <component is="auth_form"
+      :input="input"
+      :btn="{ title: 'Login', action: login_user, }"
+      v-on:update_input="update_input">
+    </component>
   </div>
-</template>
+</div>

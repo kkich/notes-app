@@ -1,31 +1,45 @@
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
+import template from './note_detail.html?vue';
+import './note_detail.css';
+import btn from '@/components/btn/btn.js';
 
 export default {
-  name: "NoteDetail",
-  props: ["id"],
+  template,
+  props: ['id'],
+  components: {
+    btn
+  },
   computed: {
-    ...mapGetters(["notes_list"]),
+    ...mapGetters(['notes_list']),
     note() {
-      return this.notes_list.find((n) => n.id === parseInt(this.id));
+      return this.notes_list.find((n) => n.id == parseInt(this.id));
     },
     notes() {
       return this.notes_list;
     },
   },
   methods: {
-    ...mapActions(["fetch_notes"]),
+    ...mapActions([
+      'fetch_notes',
+      'edit_note',
+      'delete_note',
+    ]),
     openNote(id) {
       this.$router.push(`/notes/${id}`);
     },
-    editNote() {
-      alert("edit(позже)");
-    },
-    async deleteNote() {
-      if (confirm("Delete this note?")) {
-        // позже к API
-        console.log("Note deleted", this.note.id);
-      }
-    },
+    // editNote() {
+    //   this.edit_note({
+    //     id: this.notes_list[0].id,
+    //     title: 'new title',
+    //     content: 'new text',
+    //   });
+    // },
+    // async deleteNote() {
+    //   if (confirm('Delete this note?')) {
+    //     // позже к API
+    //     this.delete_note(this.note.id);
+    //   }
+    // },
   },
   created() {
     if (!this.notes_list.length) {

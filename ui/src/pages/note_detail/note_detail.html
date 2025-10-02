@@ -7,7 +7,7 @@
           v-for="n in notes" 
           :key="n.id" 
           v-on:click="openNote(n.id)"
-          :class="{ active: n.id === note?.id }"
+          :class="{ active: n.id == note?.id }"
           v-text="n.title"
         >
         </li>
@@ -20,8 +20,12 @@
       <p class="note-detail_content_date">Дата: {{ note.date }}</p>
 
       <div class="note-detail_content_actions">
-        <button v-on:click="editNote">Редактировать</button>
-        <button v-on:click="deleteNote">Удалить</button>
+        <component is="btn" v-on:click="editNote">
+          <span>Редактировать</span>
+        </component>
+        <component is="btn" v-on:click="deleteNote">
+          <span>Удалить</span>
+        </component>
       </div>
     </main>
 
@@ -31,5 +35,3 @@
   </div>
 </template>
 
-<script src="./note_detail.js"></script>
-<style src="./note-detail.css"></style>

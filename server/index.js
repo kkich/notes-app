@@ -1,28 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-const { Pool } = require("pg");
 const routes = require('./routes');
 const cors = require("cors");
+const pool = require('./db');
 
 const app = express();
 app.use(express.json());
-
-const {
-    DB_HOST = 'db',
-    DB_USER = 'notes_user',
-    DB_PASSWORD = 'notes_pass',
-    DB_NAME = 'notes_db',
-    DB_PORT = 5432,
-} = process.env;
-
-const pool = new Pool({
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASSWORD,
-    database: DB_NAME,
-    port: Number(DB_PORT),
-    max: 5
-});
 
 
 app.use(cors({
