@@ -1,4 +1,4 @@
-import template from './auth_tab.html?vue';
+import template from './auth_tab.html?raw';
 import './auth_tab.css';
 
 export default {

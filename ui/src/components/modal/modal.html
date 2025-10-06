@@ -1,26 +1,30 @@
-<div class="modal_container">
-  <div class="modal">
-    <h3 class="modal-header"
-      v-text="header">
-    </h3>
+<div class="modal-container" v-on:click="$emit('cancel')">
+  <div class="modal" v-on:click.stop>
+    <div class="modal-box ">
+      <h3 class="modal-header"
+        v-text="header">
+      </h3>
 
-    <input class="modal-title"
-      v-model="title"
-      placeholder="Название заметки" />
-    <textarea class="modal-text"
-      v-model="text"
-      placeholder="Текст заметки">
-    </textarea>
+      <input class="modal-title"
+        :value="title"
+        placeholder="Название заметки"
+        v-on:input="$emit('update:title', $event.target.value)" />
+      <textarea class="modal-text"
+        :value="text"
+        placeholder="Текст заметки"
+        v-on:input="$emit('update:text', $event.target.value)">
+      </textarea>
 
-    <div class="modal-actions">
-      <component is="btn"
-        v-on:click="$emit('save')">
-        <span v-text="'Сохранить'"></span>
-      </component>
-      <component is="btn"
-        v-on:click="$emit('cancel')">
-        <span v-text="'Отмена'"></span>
-      </component>
+      <div class="modal-actions">
+        <component is="btn"
+          v-on:click="$emit('save')">
+          <span v-text="'Сохранить'"></span>
+        </component>
+        <component is="btn"
+          v-on:click="$emit('cancel')">
+          <span v-text="'Отмена'"></span>
+        </component>
+      </div>
     </div>
   </div>
 </div>

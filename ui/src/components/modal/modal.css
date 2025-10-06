@@ -1,4 +1,29 @@
+ .modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; 
+}
+
 .modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #fff;
   padding: 1.5rem;
   border-radius: 10px;
@@ -9,15 +34,14 @@
   gap: 1rem;
 }
 
-/* пиши стили классами например .modal-input */
-.modal input,
-.modal textarea {
+.modal-input,
+.modal-text {
   padding: .5rem;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
 
-.modal textarea {
+.modal-text{
   resize: vertical;
   min-height: 80px;
 }

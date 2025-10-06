@@ -1,69 +1,67 @@
-import template from './note_detail.html?vue';
+import template from './note_detail.html?raw';
 import { mapGetters, mapActions } from 'vuex';
-import btn from '@/components/btn/btn.js';
-import './note_detail.css';
 import sidebar from '@/components/sidebar/sidebar.js';
-
+import btn from '@/components/btn/btn.js';
+import modal from '@/components/modal/modal.js';
+import './note_detail.css';
 
 export default {
   template,
   props: ['id'],
   components: {
+    sidebar,
     btn,
-    sidebar
+    modal,
+  },
+
+  data() {
+    return {
+      showModal: false,
+    }
   },
 
   computed: {
-    ...mapGetters(['notes_list']),
-    note() {
-      return this.notes_list.find((n) => n.id == parseInt(this.id));
-    },
-    notes() {
-      return this.notes_list;
-    },
+    ...mapGetters([
+      'notes_list',
+      'current_note',
+      'current_note_id',
+    ]),
   },
 
   methods: {
     ...mapActions([
+      'select_note',
       'edit_note',
       'delete_note',
     ]),
+    open_modal() {
+      this.showModal = true;
+    },
+    close_modal() {
+      this.showModal = false;
+    },
+
     openNote(id) {
+      this.select_note(id);
       this.$router.push(`/notes/${id}`);
     },
-    // editNote() {
-    //   this.edit_note({
-    //     id: this.notes_list[0].id,
-    //     title: 'new title',
-    //     content: 'new text',
-    //   });
-    // },
-    // deleteNote() {
-    //   if (confirm('Delete this note?')) {
-    //     // позже к API
-    //     this.delete_note(this.note.id);
-    //   }
-    // },
 
     editNote() {
       this.edit_note({
-        id: this.note.id,
-        title: 'new title',
-        content: 'new text',
+        id: this.current_note_id,
+        title: this.current_note.title,
+        text: this.current_note.text,
       });
+      this.close_modal();
     },
+    
+    cancelEditNote() {
+      this.close_modal();
+    },
+
     async deleteNote() {
-      if (confirm('Delete this note?')) {
-        this.delete_note(this.note.id);
-        this.$router.push('/notes');
-      }
+      this.delete_note(this.current_note_id);
+      this.$router.push('/notes_list');
     },
-  },
-   handleLogout() {
-    this.$store.dispatch('logout');
-    this.$router.push('/login');
-  },
-  goToNotesList() {
-    this.$router.push('/notes');
   },
 };

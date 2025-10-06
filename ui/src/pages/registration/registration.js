@@ -1,4 +1,4 @@
-import template from './registration.html?vue';
+import template from './registration.html?raw';
 import { mapGetters, mapActions } from 'vuex';
 import auth from '@/components/auth/auth.js';
 import './registration.css';

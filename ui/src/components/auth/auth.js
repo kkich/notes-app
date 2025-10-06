@@ -1,4 +1,4 @@
-import template from './auth.html?vue';
+import template from './auth.html?raw';
 import { mapGetters } from 'vuex';
 import auth_tab from '@/components/auth/auth_tab.js';
 import btn from '@/components/btn/btn.js';

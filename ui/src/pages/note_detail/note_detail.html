@@ -1,27 +1,46 @@
-<div class="note-detail">
-  <sidebar :notes="notes" 
-      :activeNoteId="note?.id"
-      :clickableTitle="true"
-      v-on:open-note="openNote"
-      v-on:logout="handleLogout"
-      v-on:go-list="goToNotesList"
-  ></sidebar>
-  <main class="note-detail_content" v-if="note">
-    <h2 v-text="note.title"></h2>
-    <p v-text="note.text"></p>
-    <p class="note-detail_content_date">Дата: {{ note.date }}</p>
+<div class="note_detail">
+  <component is="sidebar" :clickable="true">
+    <div class="note_detail-sidebar"
+      v-if="notes_list.length">
+      <span class="note_detail-sidebar_item"
+        :class="{ active: current_note_id == note.id }"
+        v-for="note in notes_list" 
+        :key="note.id" 
+        v-text="note.title"
+        v-on:click="openNote(note.id)">
+      </span>
+    </div>
+  </component>
 
-    <div class="note-detail_content_actions">
-      <component is="btn" v-on:click="editNote">
-        <span>Редактировать</span>
+  <main class="note_detail-content" v-if="current_note">
+    <h2 v-text="current_note.title"></h2>
+    <p class="note_detail-content_date"
+      v-text="`Дата: ${current_note.created_at}`">
+    </p>
+    <p v-text="current_note.text"></p>
+    
+    <div class="note_detail-content_actions">
+      <component is="btn"
+        v-on:click="open_modal">
+        <span v-text="'Редактировать'"></span>
       </component>
-      <component is="btn" v-on:click="deleteNote">
-        <span>Удалить</span>
+      <component is="btn"
+        v-on:click="deleteNote">
+        <span v-text="'Удалить'"></span>
       </component>
     </div>
   </main>
 
   <main v-else>
-    <p>Заметка не найдена</p>
+    <p v-text="'Заметка не найдена'"></p>
   </main>
+
+  <component v-show="showModal"
+    is="modal"
+    :header="`Редактирование заметки' ${current_note.title}`"
+    v-model:title="current_note.title"
+    v-model:text="current_note.text"
+    v-on:save="editNote()"
+    v-on:cancel="cancelEditNote()">
+  </component>
 </div>

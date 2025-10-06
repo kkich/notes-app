@@ -2,8 +2,7 @@
   <component is="auth_tab"
     :active_tab="id">
   </component>
-  <!-- error text here -->
-  <!-- <span v-text="error"></span> -->
+   <span v-if="error" class="auth-error" v-text="error"></span>
 
   <form class="auth_form" v-on:submit.prevent="btn.action">
     <template v-for="item in input" :key="item.id">

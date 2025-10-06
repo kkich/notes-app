@@ -79,8 +79,8 @@ router.post("/login", async (req, res) => {
 
     if (!user) return res.status(400).json({ error: "Invalid username or password" });
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ error: "Invalid username or password" });
+    const is_match = await bcrypt.compare(password, user.password);
+    if (!is_match) return res.status(400).json({ error: "Invalid username or password" });
 
     const token = jwt.sign(
       { id: user.id, username: user.username },
@@ -111,11 +111,11 @@ router.get("/notes", authMiddleware, async (req, res) => {
 
 // Создать
 router.post("/notes", authMiddleware, async (req, res) => {
-  const { title, content } = req.body;
+  const { title, text } = req.body;
   try {
     const { rows } = await pool.query(
-      "INSERT INTO notes (user_id, title, content) VALUES ($1, $2, $3) RETURNING *",
-      [req.user.id, title, content]
+      "INSERT INTO notes (user_id, title, text) VALUES ($1, $2, $3) RETURNING *",
+      [req.user.id, title, text]
     );
     res.status(201).json(rows[0]);
   } catch (err) {
@@ -126,15 +126,15 @@ router.post("/notes", authMiddleware, async (req, res) => {
 // Обновить
 router.put("/notes/:id", authMiddleware, async (req, res) => {
   const { id } = req.params;
-  const { title, content } = req.body;
+  const { title, text } = req.body;
 
   try {
     const { rows } = await pool.query(
       `UPDATE notes 
-       SET title = $1, content = $2 
+       SET title = $1, text = $2 
        WHERE id = $3 AND user_id = $4 
        RETURNING *`,
-      [title, content, id, req.user.id]
+      [title, text, id, req.user.id]
     );
 
     if (rows.length === 0) {

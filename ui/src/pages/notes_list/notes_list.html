@@ -1,47 +1,44 @@
-<div class="notes">
-  <!--sidebar-->
-  <aside class="notes-sidebar">
-    <div class="sidebar-top">
+<div class="notes_list">
+  <component is="sidebar" :clickable="false"></component>
+  <main class="notes_list-content"
+    :class="{ 'notes_list-content--blurred': showModal }">
+    <div class="notes_list-content_header">
       <h2>Notes</h2>
-    </div>
-    <div class="sidebar-bottom">
-      <component is="btn" v-on:click="log_out">
-        <span v-text="'Log out'"></span>
+      <component :is="btn"
+        v-on:click="open_modal">
+        <span v-test="'+ Add Note'"></span>
       </component>
     </div>
-  </aside>
-  <!--main-->
-  <main class="notes-content" :class="{ 'blurred': showModal }">
-    <div class="notes-content_header">
-      <h2>Notes</h2>
-      <btn v-on:click="open_modal">
-        <span>+ Add Note</span>
-      </btn>
-    </div>
-    <div class="notes-list-wrapper">
-        <!--если нет заметок-->
-      <div class="notes-content_empty"
+
+    <div class="notes_list-container">
+      <div class="notes_list-content_empty"
         v-if="!notes_list.length">
         <p>No notes yet.</p>
         <p>Click + Add Note to create one.</p>
       </div>
-      <!--если есть заметки-->
-      <ul v-else class="notes-content_list">
-        <li class="notes-content_list_item"
+
+      <ul v-else class="notnotes_listes-content_list">
+        <li class="notes_list-content_list-item"
           v-for="note in notes_list"
           :key="note.id"
           v-on:click="openNote(note.id)">
           <div>
             <strong v-text="note.title"></strong>
-            <p v-text="note.title"></p>
+            <p v-text="note.text"></p>
           </div>
-          <span class="notes-content_list_item_date" v-text="note.date"></span>
+          <span class="notes_list-content_list-item_date" v-text="note.created_at"></span>
         </li>
       </ul>
     </div>
   </main>
 
   <component v-show="showModal"
-    is="modal">
+    is="modal"
+    header="Создать новую заметку"
+    v-model:title="newNote.title"
+    v-model:text="newNote.text"
+    v-on:save="saveNote()"
+    v-on:cancel="cancelNote()"
+    v-on:close="cancelNote()">
   </component>
 </div>

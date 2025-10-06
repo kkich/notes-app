@@ -1,29 +1,17 @@
 <div class="sidebar">
   <aside class="sidebar-aside">
-    <h3 
-      class="sidebar_title" 
-      :class="{ clickable: clickableTitle }"
-      v-on:click="clickableTitle ? $emit('go-list') : null"
-    >
-      Notes
+    <h3  class="sidebar-title" 
+      :class="{ clickable: clickable }"
+      v-text="'Notes'"
+      v-on:click="goto_main()">
     </h3>
-
-    <div v-if="notes && notes.length">
-      <ul>
-        <li 
-          v-for="n in notes" 
-          :key="n.id" 
-          v-on:click="$emit('open-note', n.id)"
-          :class="{ active: activeNoteId === n.id }"
-          v-text="n.title"
-        ></li>
-      </ul>
-    </div>
-
-    <div class="sidebar_logout">
-      <component is="btn" v-on:click="$emit('logout')">
-        <span>Log Out</span>
-      </component>
+    <slot></slot>
+    <div class="sidebar-footer">
+      <div class="sidebar-btn">
+        <component is="btn" v-on:click="handleLogout">
+          <span v-text="'Log Out'"></span>
+        </component>
+      </div>
     </div>
   </aside>
 </div>

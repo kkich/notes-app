@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const API = 'http://localhost:3000/api';
 const headers = {
-  Authorization: `Bearer ${ localStorage.getItem("token") }`,
+  Authorization: `Bearer ${ localStorage.getItem("notes_token") }`,
 };
 
 export default createStore({
@@ -17,7 +17,7 @@ export default createStore({
   getters: {
     current_user: state => state.user,
     is_auth: () => {
-      return !!localStorage.getItem('token');
+      return !!localStorage.getItem('notes_token');
     },
     error: state => state.error,
     notes_list: state => state.notes,
@@ -35,8 +35,8 @@ export default createStore({
     set_notes(state, notes) {
       state.notes = notes;
     },
-    set_current_note(state, note) {
-      state.current_note = note;
+    set_current_note(state) {
+      state.current_note = state.notes.find(note => note.id == localStorage.getItem('notes_note_id'));
     },
     reset_current_note(state) {
       state.current_note = {};
@@ -44,10 +44,10 @@ export default createStore({
     add_note(state, new_note) {
       state.notes = [...state.notes, new_note];
     },
-    edit_note(state, { id, new_content }) {
+    edit_note(state, { id, new_text}) {
       const idx = state.notes.findIndex(note => note.id == id);
       if (idx != -1) {
-        state.notes[idx] = { ...state.notes[idx], ...new_content };
+        state.notes[idx] = { ...state.notes[idx], ...new_text };
       }
     },
     remove_note(state, id) {
@@ -56,8 +56,12 @@ export default createStore({
   },
 
   actions: {
-    async init({ dispatch }) {
-      await dispatch('fetch_notes');
+    async init({ dispatch, commit }) {
+      if (localStorage.getItem('notes_token')) {
+        commit('set_user', JSON.parse(localStorage.getItem('notes_user') || {}));
+        await dispatch('fetch_notes');
+        commit('set_current_note');
+      }
     },
 
     async registration({ commit }, { username, password }) {
@@ -70,7 +74,7 @@ export default createStore({
           throw new Error(error);
         }
         commit('set_user', user);
-        localStorage.setItem('token', token);
+        localStorage.setItem('notes_token', token);
       } catch (err) {
         const msg = err.response?.data?.error || err.message;
         commit('set_error', msg);
@@ -88,9 +92,10 @@ export default createStore({
           throw new Error(error);
         }
         commit('set_user', user);
-        localStorage.setItem('token', token);
+        localStorage.setItem('notes_user', JSON.stringify(user));
+        localStorage.setItem('notes_token', token);
         await dispatch('init');
-        return data.user;
+        return res.data.user;
       } catch (err) {
         const msg = err.response?.data?.error || err.message;
         commit('set_error', msg);
@@ -99,8 +104,12 @@ export default createStore({
     },
 
     async logout({ commit }) {
-       commit('set_user', null);
-      localStorage.removeItem('token');
+      console.log('heer');
+      
+      commit('set_user', null);
+      localStorage.removeItem('notes_user');
+      localStorage.removeItem('notes_token');
+      localStorage.removeItem('notes_note_id');
       commit('set_notes', []);
     },
 
@@ -115,36 +124,61 @@ export default createStore({
 
     async add_note({ commit, state }, new_note) {
       try {
-        const { data } = await axios.post(`${API}/notes`, new_note, { headers });
-        // add note commit
+        const { data } = await axios.post(`${API}/notes`, 
+          { title: new_note.title, text: new_note.text }, 
+          { headers },
+        );
+        if (!data || data.error) {
+          throw new Error(data?.error || 'Ошибка добавления заметки');
+        }
+        const { id, title, text } = data;
+        commit('add_note', { id, title, text, created_at: new_note.created_at});
         return data;
       } catch (err) {
-        console.error('Failed to add note:', err);
+        console.error('Ошибка добавления заметки:', err.response?.data || err.message);
+        throw err;
       }
     },
 
     async edit_note({ commit }, { id, title, text }) {
       try {
-        const { data } = await axios.put(`${API}/notes/${id}`,
-          { title, text }, { headers },
+        const { data } = await axios.put(`${API}/notes/${id}`, 
+          { title, text }, 
+          { headers },
         );
-        // edit note commit
+        if (!data || data.error) {
+          throw new Error(data?.error || 'Ошибка редактирования заметки');
+        }
+        commit('edit_note', { id: data.id, new_text: { title: data.title, text: data.text } });
         return data;
       } catch (err) {
-        console.error("Error editing note:", err.response?.data || err.message);
-        throw err;
+        console.error("Ошибка редактирования заметки:", err.response?.data || err.message);
+        throw err; 
       }
     },
 
     async delete_note({ commit }, id) {
       try {
         const { data } = await axios.delete(`${API}/notes/${id}`, { headers });
-        // remove note commit
+        if (!data || data.error) {
+          throw new Error(data?.error || 'Ошибка удаления заметки');
+        }
+        commit('remove_note', id);
         return true;
       } catch (err) {
-        console.error("Error deleting note:", err.response?.data || err.message);
-        throw err;
+        console.error("Ошибка при удалении заметки:", err.response?.data || err.message);
+        throw err; 
       }
+    },
+
+    select_note({ commit }, id) {
+      localStorage.setItem('notes_note_id', id);
+      commit('set_current_note');
+    },
+
+    reset_current_note({ commit }) {
+      localStorage.re('notes_note_id');
+      commit('reset_current_note');
     },
   },
 });

@@ -1,4 +1,4 @@
-import template from './login.html?vue';
+import template from './login.html?raw';
 import { mapActions } from 'vuex';
 import auth from '@/components/auth/auth.js';
 import './login.css';
@@ -33,7 +33,6 @@ export default {
       this.input.find(item => item.id == id).value = value;
     },
     async login_user(){
-      // make the same logic as registration
       const [username, password] = this.input.map(i => i.value);
       try {
         await this.login({ username, password });

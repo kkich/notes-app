@@ -18,7 +18,7 @@ app.use("/api", routes);
 const PORT = process.env.PORT || 3000;
 
 // ожидание старта базы
-async function waitForDb(retries = 10, delayMs = 1000) {
+async function wait_for_db(retries = 10, delayMs = 1000) {
   for (let i = 0; i < retries; i++) {
     try {
       await pool.query('SELECT 1');
@@ -33,7 +33,7 @@ async function waitForDb(retries = 10, delayMs = 1000) {
 }
 
 // автоматическое создание таблиц
-async function initTables() {
+async function init_tables() {
   try {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -49,7 +49,7 @@ async function initTables() {
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
         title VARCHAR(200) NOT NULL,
-        content TEXT,
+        text TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
@@ -77,8 +77,8 @@ app.get('/', (req, res) => {
 // Запуск
 (async () => {
   try {
-    await waitForDb(15, 1000);
-    await initTables();  
+    await wait_for_db(15, 1000);
+    await init_tables();  
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
   } catch (err) {
     console.error('Failed to start server:', err.message);
