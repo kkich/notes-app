@@ -1,16 +1,11 @@
 <div class="note-detail">
-  <aside class="note-detail_sidebar">
-    <h3>All Notes</h3>
-    <ul>
-      <li :class="{ active: n.id == note?.id }"
-        v-for="n in notes" 
-        :key="n.id" 
-        v-text="n.title"
-        v-on:click="openNote(n.id)">
-      </li>
-    </ul>
-  </aside>
-
+  <sidebar :notes="notes" 
+      :activeNoteId="note?.id"
+      :clickableTitle="true"
+      v-on:open-note="openNote"
+      v-on:logout="handleLogout"
+      v-on:go-list="goToNotesList"
+  ></sidebar>
   <main class="note-detail_content" v-if="note">
     <h2 v-text="note.title"></h2>
     <p v-text="note.text"></p>

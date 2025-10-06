@@ -2,6 +2,7 @@ import template from './notes_list.html?vue';
 import { mapGetters, mapActions } from 'vuex';
 import btn from '@/components/btn/btn.js';
 import modal from '@/components/modal/modal.js';
+import sidebar from '@/components/sidebar/sidebar.js';
 import './notes_list.css';
 
 export default {
@@ -9,6 +10,7 @@ export default {
   components: {
     btn,
     modal,
+    sidebar,
   },
 
   data() {

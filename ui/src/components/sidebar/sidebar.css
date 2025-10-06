@@ -1,0 +1,29 @@
+.sidebar {
+  width: 200px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.sidebar li.active {
+  font-weight: bold;
+  background: #f0f0f0;
+}
+
+.sidebar_logout {
+  margin-top: auto;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+}

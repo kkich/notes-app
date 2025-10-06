@@ -1,3 +1,29 @@
 <div class="sidebar">
-    <!-- content here -->
+  <aside class="sidebar-aside">
+    <h3 
+      class="sidebar_title" 
+      :class="{ clickable: clickableTitle }"
+      v-on:click="clickableTitle ? $emit('go-list') : null"
+    >
+      Notes
+    </h3>
+
+    <div v-if="notes && notes.length">
+      <ul>
+        <li 
+          v-for="n in notes" 
+          :key="n.id" 
+          v-on:click="$emit('open-note', n.id)"
+          :class="{ active: activeNoteId === n.id }"
+          v-text="n.title"
+        ></li>
+      </ul>
+    </div>
+
+    <div class="sidebar_logout">
+      <component is="btn" v-on:click="$emit('logout')">
+        <span>Log Out</span>
+      </component>
+    </div>
+  </aside>
 </div>
