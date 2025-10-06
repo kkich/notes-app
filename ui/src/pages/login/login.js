@@ -1,7 +1,6 @@
 import template from './login.html?raw';
 import { mapActions } from 'vuex';
 import auth from '@/components/auth/auth.js';
-import './login.css';
 
 export default {
   template,
@@ -16,13 +15,13 @@ export default {
         type: 'text',
         placeholder: 'Enter username',
         value: '',
-        label: 'Username'
+        label: 'Username',
       },{
         id: 'password',
         type: 'password',
         placeholder: 'Enter password',
         value: '',
-        label: 'Password'
+        label: 'Password',
       }],
     };
   },
@@ -36,7 +35,7 @@ export default {
       const [username, password] = this.input.map(i => i.value);
       try {
         await this.login({ username, password });
-        this.$router.push('/notes_list');
+        this.$router.push('/notes');
       } catch(err) {
         alert('Login failed: ' + (err.response?.data?.error || err.message));
       }

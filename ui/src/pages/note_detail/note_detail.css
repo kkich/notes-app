@@ -1,15 +1,16 @@
 .note_detail {
   display: flex;
   gap: 20px;
+  overflow: hidden;
 }
 
 .note_detail-sidebar {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 0.8rem;
   gap: 8px;
   overflow-y: auto;
-  flex: 1;
+  padding: .8rem;
 }
 .note_detail-sidebar::-webkit-scrollbar {
   width: 6px;
@@ -24,31 +25,31 @@
 
 .note_detail-sidebar_item {
   padding: 10px 12px;
-  background: #fff;
   border: 1px solid #e6e6e6;
   border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #333;
-  font-size: 0.95rem;
+  background-color: #fff;
+    font-size: .95rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #333;
+  transition: all .2s ease;
+  cursor: pointer;
 }
 .note_detail-sidebar_item:hover {
-  background: #f2f6ff;
   border-color: #199c7e;
+  background-color: #f2f6ff;
   color: #199c7e;
 }
 .note_detail-sidebar_item.active {
-  background: #eaf2ff;
   border-color: #199c7e;
+  background-color: #eaf2ff;
   color: #199c7e;
   font-weight: 600;
 }
 
 .note_detail-content {
-  flex: 1;
+  width: calc(100% - 260px);
   padding: 10px;
 }
 
@@ -56,4 +57,11 @@
   display: flex;
   gap: 10px;
   margin-top: 20px;
+}
+
+.note_detail-content_title,
+.note_detail-content_text {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  white-space: normal;
 }

@@ -16,7 +16,7 @@ export default {
 
   data() {
     return {
-      showModal: false,
+      is_open_modal: false,
     }
   },
 
@@ -34,19 +34,20 @@ export default {
       'edit_note',
       'delete_note',
     ]),
+
     open_modal() {
-      this.showModal = true;
+      this.is_open_modal = true;
     },
     close_modal() {
-      this.showModal = false;
+      this.is_open_modal = false;
     },
 
-    openNote(id) {
+    open_note(id) {
       this.select_note(id);
       this.$router.push(`/notes/${id}`);
     },
 
-    editNote() {
+    edit_note() {
       this.edit_note({
         id: this.current_note_id,
         title: this.current_note.title,
@@ -55,13 +56,18 @@ export default {
       this.close_modal();
     },
     
-    cancelEditNote() {
+    cancel_editing() {
       this.close_modal();
     },
 
-    async deleteNote() {
-      this.delete_note(this.current_note_id);
-      this.$router.push('/notes_list');
+    async delete_note() {
+      try {
+        await this.delete_note(this.current_note_id);
+        this.$router.push('/notes');
+      } catch (err) {
+        console.warn('Ошибка при удалении:', err);
+        this.$router.push('/notes');
+      };
     },
   },
 };

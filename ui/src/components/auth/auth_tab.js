@@ -8,10 +8,10 @@ export default {
     return {
       tabs: [{
         name: 'Login',
-        route: '/login'
+        route: '/login',
       }, {
         name: 'Registration',
-        route: '/registration'
+        route: '/registration',
       }],
     };
   },

@@ -1,9 +1,7 @@
 <div class="modal-container" v-on:click="$emit('cancel')">
   <div class="modal" v-on:click.stop>
-    <div class="modal-box ">
-      <h3 class="modal-header"
-        v-text="header">
-      </h3>
+    <div class="modal-box">
+      <h3 class="modal-header" v-text="header"></h3>
 
       <input class="modal-title"
         :value="title"

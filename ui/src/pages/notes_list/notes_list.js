@@ -1,22 +1,22 @@
 import template from './notes_list.html?raw';
 import { mapGetters, mapActions } from 'vuex';
+import sidebar from '@/components/sidebar/sidebar.js';
 import btn from '@/components/btn/btn.js';
 import modal from '@/components/modal/modal.js';
-import sidebar from '@/components/sidebar/sidebar.js';
 import './notes_list.css';
 
 export default {
   template,
   components: {
+    sidebar,
     btn,
     modal,
-    sidebar,
   },
 
   data() {
     return {
-      showModal: false,
-      newNote: {
+      is_open_modal: false,
+      new_note: {
         title: '',
         text: '',
       }
@@ -39,19 +39,30 @@ export default {
     ]),
 
     open_modal() {
-      this.showModal = true;
+      this.is_open_modal = true;
     },
     close_modal() {
-      this.showModal = false;
+      this.is_open_modal = false;
     },
 
-    saveNote() {
-      if (!this.newNote.title || !this.newNote.text) {
+    open_note(id) {
+      this.select_note(id);
+      this.$router.push(`/notes/${id}`);
+    },
+
+    reset_note() {
+      this.new_note.title = '';
+      this.new_note.text = '';
+      this.close_modal();
+    },
+
+    save_note() {
+      if (!this.new_note.title || !this.new_note.text) {
         return;
       }
       const note = {
-        title: this.newNote.title,
-        text: this.newNote.text,
+        title: this.new_note.title,
+        text: this.new_note.text,
         created_at: new Date().toLocaleString('ru-RU', {
           day: '2-digit',
           month: '2-digit',
@@ -62,23 +73,10 @@ export default {
         }),
       };
       this.add_note(note);
-      this.newNote.title = '';
-      this.newNote.text = '';
-      this.showModal = false;
-    },
-
-    cancelNote() {
-      this.newNote.title = '';
-      this.newNote.text = '';
-      this.showModal = false;
-    },
-
-    openNote(id) {
-      this.select_note(id);
-      this.$router.push(`/notes/${id}`);
+      reset_note();
     },
     
-    editNote() {
+    edit_note() {
       if (!this.current_note.title || !this.current_note.text) {
         return;
       }
@@ -87,7 +85,7 @@ export default {
         title: this.current_note.title,
         text: this.current_note.text,
       });
-      this.cancelNote(); 
+      this.reset_note();
     },
 
     log_out() {

@@ -8,6 +8,10 @@
   justify-content: space-between;
   background-color: #fafafa;
   font-family: "Inter", sans-serif;
+
+  flex-shrink: 0;
+  min-width: 220px;
+  max-width: 220px;
 }
 
 .sidebar-title {
@@ -18,7 +22,7 @@
   text-align: center;
   padding: 1rem 0;
   border-bottom: 1px solid #eee;
-  transition: all 0.3s ease;
+  transition: all .3s ease;
 }
 .sidebar-title:hover {
   color: #199c7e;

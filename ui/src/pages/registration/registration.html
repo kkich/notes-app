@@ -1,8 +1,6 @@
-<div class="registration">
-  <component is="auth"
-    id="registration"
-    :input="input"
-    :btn="{ title: 'Sign Up', action: register_user }"
-    v-on:update_input="update_input">
-  </component>
-</div>
+<component is="auth"
+  id="registration"
+  :input="input"
+  :btn="{ title: 'Sign Up', action: register_user }"
+  v-on:update_input="update_input">
+</component>

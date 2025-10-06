@@ -1,14 +1,14 @@
 <div class="sidebar">
   <aside class="sidebar-aside">
-    <h3  class="sidebar-title" 
+    <h3 class="sidebar-title"
       :class="{ clickable: clickable }"
       v-text="'Notes'"
-      v-on:click="goto_main()">
+      v-on:click="goto_list()">
     </h3>
     <slot></slot>
     <div class="sidebar-footer">
       <div class="sidebar-btn">
-        <component is="btn" v-on:click="handleLogout">
+        <component is="btn" v-on:click="handle_logout">
           <span v-text="'Log Out'"></span>
         </component>
       </div>

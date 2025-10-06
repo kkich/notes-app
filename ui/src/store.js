@@ -68,13 +68,11 @@ export default createStore({
       commit('set_error', null);
       try {
         const res = await axios.post(`${API}/registration`, { username, password });
-        const { user, token, error } = res.data || {};
+        const { error } = res.data || {};
         if (error) {
           commit('set_error', error);
           throw new Error(error);
         }
-        commit('set_user', user);
-        localStorage.setItem('notes_token', token);
       } catch (err) {
         const msg = err.response?.data?.error || err.message;
         commit('set_error', msg);
@@ -104,8 +102,6 @@ export default createStore({
     },
 
     async logout({ commit }) {
-      console.log('heer');
-      
       commit('set_user', null);
       localStorage.removeItem('notes_user');
       localStorage.removeItem('notes_token');
@@ -116,13 +112,24 @@ export default createStore({
     async fetch_notes({ commit }) {
       try {
         const { data } = await axios.get(`${API}/notes`, { headers });
-        commit('set_notes', data);
+          const formattedNotes = data.map(note => ({
+            ...note,
+            created_at: new Date(note.created_at).toLocaleString('ru-RU', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            }),
+          }));
+        commit('set_notes', formattedNotes);
       } catch (err) {
         console.error('Failed to fetch notes:', err);
       }
     },
 
-    async add_note({ commit, state }, new_note) {
+    async add_note({ commit }, new_note) {
       try {
         const { data } = await axios.post(`${API}/notes`, 
           { title: new_note.title, text: new_note.text }, 
@@ -153,7 +160,7 @@ export default createStore({
         return data;
       } catch (err) {
         console.error("Ошибка редактирования заметки:", err.response?.data || err.message);
-        throw err; 
+        throw err;
       }
     },
 
@@ -167,7 +174,7 @@ export default createStore({
         return true;
       } catch (err) {
         console.error("Ошибка при удалении заметки:", err.response?.data || err.message);
-        throw err; 
+        throw err;
       }
     },
 
@@ -177,7 +184,7 @@ export default createStore({
     },
 
     reset_current_note({ commit }) {
-      localStorage.re('notes_note_id');
+      localStorage.removeItem('notes_note_id');
       commit('reset_current_note');
     },
   },

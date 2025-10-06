@@ -1,7 +1,6 @@
 import template from './registration.html?raw';
 import { mapGetters, mapActions } from 'vuex';
 import auth from '@/components/auth/auth.js';
-import './registration.css';
 
 export default {
   template,
@@ -16,13 +15,13 @@ export default {
         type: 'text',
         placeholder: 'Enter username',
         value: '',
-        label: 'Username'
+        label: 'Username',
       }, {
         id: 'password',
         type: 'password',
         placeholder: 'Enter password',
         value: '',
-        label: 'Password'
+        label: 'Password',
       }],
     };
   },
@@ -39,6 +38,9 @@ export default {
     register_user() {
       const [username, password] = this.input.map(i => i.value);
       this.registration({ username, password });
+      if (!this.error) {
+        this.$router.push('/login')
+      }
     },
   },
 };

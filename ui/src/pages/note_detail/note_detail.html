@@ -7,17 +7,21 @@
         v-for="note in notes_list" 
         :key="note.id" 
         v-text="note.title"
-        v-on:click="openNote(note.id)">
+        v-on:click="open_note(note.id)">
       </span>
     </div>
   </component>
 
   <main class="note_detail-content" v-if="current_note">
-    <h2 v-text="current_note.title"></h2>
+    <h2 class="note_detail-content_title"
+      v-text="current_note.title">
+    </h2>
     <p class="note_detail-content_date"
       v-text="`Дата: ${current_note.created_at}`">
     </p>
-    <p v-text="current_note.text"></p>
+    <p class="note_detail-content_text"
+      v-text="current_note.text">
+    </p>
     
     <div class="note_detail-content_actions">
       <component is="btn"
@@ -25,7 +29,7 @@
         <span v-text="'Редактировать'"></span>
       </component>
       <component is="btn"
-        v-on:click="deleteNote">
+        v-on:click="delete_note">
         <span v-text="'Удалить'"></span>
       </component>
     </div>
@@ -35,12 +39,12 @@
     <p v-text="'Заметка не найдена'"></p>
   </main>
 
-  <component v-show="showModal"
+  <component v-show="is_open_modal"
     is="modal"
     :header="`Редактирование заметки' ${current_note.title}`"
     v-model:title="current_note.title"
     v-model:text="current_note.text"
     v-on:save="editNote()"
-    v-on:cancel="cancelEditNote()">
+    v-on:cancel="cancel_editing()">
   </component>
 </div>

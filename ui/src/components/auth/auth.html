@@ -1,22 +1,23 @@
 <div class="auth">
-  <component is="auth_tab"
-    :active_tab="id">
-  </component>
-   <span v-if="error" class="auth-error" v-text="error"></span>
-
-  <form class="auth_form" v-on:submit.prevent="btn.action">
-    <template v-for="item in input" :key="item.id">
-      <label class="auth_form-label" v-text="item.label"></label>
-      <input class="auth_form-input"
-        :type="item.type"
-        :value="item.value"
-        :placeholder="item.placeholder"
-        v-on:input="$emit('update_input', { id: item.id, value: $event.target.value })"
-      />
-    </template>
-
-    <component is="btn" type="submit">
-      <span v-text="btn.title"></span>
+  <div class="auth-box">
+    <component is="auth_tab"
+      :active_tab="id">
     </component>
-  </form>
+
+    <form class="auth-form" v-on:submit.prevent="btn.action">
+      <template v-for="item in input" :key="item.id">
+        <label class="auth-form_label" v-text="item.label"></label>
+        <input class="auth-form_input"
+          :type="item.type"
+          :value="item.value"
+          :placeholder="item.placeholder"
+          v-on:input="$emit('update_input', { id: item.id, value: $event.target.value })"
+        />
+      </template>
+
+      <component is="btn" type="submit">
+        <span v-text="btn.title"></span>
+      </component>
+    </form>
+  </div>
 </div>

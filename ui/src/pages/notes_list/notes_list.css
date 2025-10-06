@@ -1,34 +1,37 @@
 .notes_list {
   display: flex;
   height: 100vh;
-  background: #f9f9fb;
+  background-color: #f9f9fb;
   overflow: hidden;
+  word-wrap: break-word;   
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
-.notes_list-content {
+.notes_list-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 2rem;
   overflow: hidden;
 }
-.notes_list-content--blurred {
+.notes_list-container--blurred {
   filter: blur(3px);
   pointer-events: none;
   user-select: none;
 }
 
-.notes_list-content_header {
+.notes_list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
 }
 
-.notes_list-container {
+.notes_list-content {
+  flex: 1;         
+  overflow-y: auto;
   margin-top: 1rem;
-  flex: 1;          
-  overflow-y: auto;  
   padding-right: .5rem;
 }
 
@@ -40,31 +43,49 @@
 
 .notes_list-content_list {
   margin-top: 2rem;
-  list-style: none;
   padding: 0;
+  list-style: none;
 }
 
 .notes_list-content_list-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  background: #fff;
+  position: relative;
+  width: calc(100% - 2rem);
   margin-bottom: 1rem;
+  padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0, 0, 0, .05);
+  background-color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   cursor: pointer;
 }
 .notes_list-content_list-item:hover {
-  background: #f9fafb;
+  background-color: #f9fafb;
 }
-.notes_list-content_list-item strong {
+
+.notes_list-content_list-item_title,
+.notes_list-content_list-item_text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notes_list-content_list-item_title {
   font-size: 1rem;
+  width: 50%;
 }
-.notes_list-content_list-item p {
+
+.notes_list-content_list-item_text {
   font-size: .85rem;
   color: #6b7280;
+  width: 80%;
 }
+
 .notes_list-content_list-item_date {
+  position: absolute;
+  right: 4px;
+  top: 4px;
   font-size: .8rem;
   color: #9ca3af;
 }

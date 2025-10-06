@@ -7,7 +7,7 @@ export default {
   template,
   props: ['clickable'],
   components: { 
-    btn 
+    btn,
   },
 
   methods: {
@@ -16,16 +16,16 @@ export default {
       'reset_current_note',
     ]),
 
-    handleLogout() {
+    handle_logout() {
       this.logout();
       this.$router.push('/login');
     },
-
-    goto_main() {
+    
+    goto_list() {
       if (this.clickable) {
         this.reset_current_note();
-        this.$router.push('/notes_list');
+        this.$router.push('/notes');
       }
     },
-  }
+  },
 };
