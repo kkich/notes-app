@@ -1,4 +1,4 @@
-import template from "./sidebar.html?vue";
+import template from "./sidebar.html?raw";
 import { mapActions } from 'vuex';
 import btn from "@/components/btn/btn.js";
 import "./sidebar.css";

@@ -29,6 +29,16 @@ services:
     volumes:
       - ./server:/usr/src/app
     restart: unless-stopped
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.front
+    container_name: notes-frontend
+    ports:
+      - "5174:80" 
+    depends_on:
+      - backend
+    restart: unless-stopped
 volumes:
   db_data:
     
