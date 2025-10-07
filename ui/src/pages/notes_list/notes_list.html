@@ -21,7 +21,7 @@
         <li class="notes_list-content_list-item"
           v-for="note in notes_list"
           :key="note.id"
-          v-on:click="open_note(note.id)">
+          v-on:click="select(note.id)">
           <h4 class="notes_list-content_list-item_title"
             v-text="note.title">
           </h4>
@@ -41,7 +41,7 @@
     header="Создать новую заметку"
     v-model:title="new_note.title"
     v-model:text="new_note.text"
-    v-on:save="save_note()"
-    v-on:cancel="reset_note()">
+    v-on:save="save_notes"
+    v-on:cancel="reset_note">
   </component>
 </div>

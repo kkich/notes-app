@@ -165,17 +165,12 @@ export default createStore({
     },
 
     async delete_note({ commit }, id) {
-      try {
-        const { data } = await axios.delete(`${API}/notes/${id}`, { headers });
-        if (!data || data.error) {
-          throw new Error(data?.error || 'Ошибка удаления заметки');
-        }
-        commit('remove_note', id);
-        return true;
-      } catch (err) {
-        console.error("Ошибка при удалении заметки:", err.response?.data || err.message);
-        throw err;
+      const { data } = await axios.delete(`${API}/notes/${id}`, { headers });
+      if (!data || data.error) {
+        throw new Error(data?.error || 'Ошибка удаления заметки');
       }
+      commit('remove_note', id);
+      return true;
     },
 
     select_note({ commit }, id) {

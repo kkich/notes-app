@@ -3,4 +3,5 @@ import './btn.css';
 
 export default {
   template,
+  emits: ['click'],
 };

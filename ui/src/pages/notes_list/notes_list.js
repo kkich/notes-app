@@ -45,7 +45,7 @@ export default {
       this.is_open_modal = false;
     },
 
-    open_note(id) {
+    select(id) {
       this.select_note(id);
       this.$router.push(`/notes/${id}`);
     },
@@ -56,7 +56,7 @@ export default {
       this.close_modal();
     },
 
-    save_note() {
+    save_notes() {
       if (!this.new_note.title || !this.new_note.text) {
         return;
       }
@@ -73,10 +73,10 @@ export default {
         }),
       };
       this.add_note(note);
-      reset_note();
+      this.reset_note();
     },
     
-    edit_note() {
+    edit_notes() {
       if (!this.current_note.title || !this.current_note.text) {
         return;
       }

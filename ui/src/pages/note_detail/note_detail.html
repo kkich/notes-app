@@ -7,7 +7,7 @@
         v-for="note in notes_list" 
         :key="note.id" 
         v-text="note.title"
-        v-on:click="open_note(note.id)">
+        v-on:click="select(note.id)">
       </span>
     </div>
   </component>
@@ -29,7 +29,7 @@
         <span v-text="'Редактировать'"></span>
       </component>
       <component is="btn"
-        v-on:click="delete_note">
+        v-on:click="remove">
         <span v-text="'Удалить'"></span>
       </component>
     </div>
@@ -44,7 +44,7 @@
     :header="`Редактирование заметки' ${current_note.title}`"
     v-model:title="current_note.title"
     v-model:text="current_note.text"
-    v-on:save="editNote()"
+    v-on:save="edit()"
     v-on:cancel="cancel_editing()">
   </component>
 </div>
